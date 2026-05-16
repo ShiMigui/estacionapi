@@ -1,18 +1,22 @@
-FROM eclipse-temurin:21 AS build
+FROM eclipse-temurin:21 AS builder
 
 WORKDIR /app
 
-COPY . .
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle .
+COPY settings.gradle .
+COPY src src
 
 RUN chmod +x gradlew
 
-RUN ./gradlew build -x test
+RUN ./gradlew bootJar -x test
 
-FROM eclipse-temurin:21
+FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-COPY --from=build /app/build/libs/*.jar app.jar
+COPY --from=builder /app/build/libs/*.jar app.jar
 
 EXPOSE 8080
 
