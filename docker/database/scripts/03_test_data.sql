@@ -19,7 +19,7 @@ INSERT INTO responsaveis_carros (cliente_id, carro_id) VALUES
 (2, 3),
 (3, 4),
 (4, 5),
-(5, 6),
+(4, 6),
 (2, 7);
 
 INSERT INTO entradas (carro_id, preco_base, saida) VALUES
