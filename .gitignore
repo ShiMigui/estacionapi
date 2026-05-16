@@ -1,11 +1,10 @@
+# Compiled class files
 *.class
 
+# Logs
 *.log
 
-*.ctxt
-
-.mtj.tmp/
-
+# Package files
 *.jar
 *.war
 *.nar
@@ -13,7 +12,53 @@
 *.zip
 *.tar.gz
 *.rar
-*.env
 
+# Environment files
+.env
+.env.*
+
+# JVM crash logs
 hs_err_pid*
 replay_pid*
+
+# Gradle
+.gradle/
+build/
+
+# IntelliJ
+.idea/
+*.iml
+out/
+
+# VSCode
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated binaries
+bin/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Spring profiles local
+application-local.yaml
+
+# Docker volumes
+postgres-data/
