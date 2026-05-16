@@ -12,11 +12,12 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_NAME}
-    env_file: [.env]
     volumes: [postgres_data:/var/lib/postgresql/data]
 
   api:
-    build: ./api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     container_name: estacionapi-api
     ports: ["8080:8080"]
     depends_on:
