@@ -1,15 +1,16 @@
 CREATE TABLE marcas (
    id SMALLSERIAL,
-   nome VARCHAR(32),
+   nome VARCHAR(32) UNIQUE NOT NULL,
    PRIMARY KEY(id)
 );
 
 CREATE TABLE modelos (
    id SMALLSERIAL,
-   nome VARCHAR(32),
+   nome VARCHAR(32) NOT NULL,
    marca_id SMALLINT NOT NULL,
    PRIMARY KEY (id),
-   FOREIGN KEY (marca_id) REFERENCES marcas(id)
+   CONSTRAINT uq_modelo_marca UNIQUE(nome, marca_id),
+   FOREIGN KEY (marca_id) REFERENCES marcas(id) ON DELETE CASCADE
 );
 
 CREATE TABLE clientes (
@@ -21,7 +22,7 @@ CREATE TABLE clientes (
 
 CREATE TABLE carros (
    id SERIAL,
-   placa VARCHAR(7) UNIQUE NOT NULL,
+   placa CHAR(7) UNIQUE NOT NULL,
    cor SMALLINT NOT NULL,
    modelo_id SMALLINT NOT NULL,
    PRIMARY KEY(id),
@@ -32,14 +33,14 @@ CREATE TABLE responsaveis_carros (
    cliente_id INTEGER NOT NULL,
    carro_id INTEGER NOT NULL,
    PRIMARY KEY(cliente_id, carro_id),
-   FOREIGN KEY(cliente_id) REFERENCES clientes(id),
-   FOREIGN KEY(carro_id) REFERENCES carros(id)
+   FOREIGN KEY(cliente_id) REFERENCES clientes(id) ON DELETE CASCADE,
+   FOREIGN KEY(carro_id) REFERENCES carros(id) ON DELETE CASCADE
 );
 
 CREATE TABLE precos (
    id SMALLSERIAL,
-   preco DECIMAL(10, 2),
-   nome VARCHAR(100),
+   preco DECIMAL(10, 2) NOT NULL CHECK(preco >= 0),
+   nome VARCHAR(100) NOT NULL,
    descricao TEXT,
    PRIMARY KEY(id)
 );
@@ -48,7 +49,9 @@ CREATE TABLE entradas (
    carro_id INTEGER NOT NULL,
    entrada TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
    preco_base DECIMAL(10, 2) NOT NULL,
-   saida TIMESTAMPTZ,
+   preco_id SMALLINT,
+   saida TIMESTAMPTZ CHECK(saida IS NULL OR saida >= entrada),
    PRIMARY KEY(carro_id, entrada),
-   FOREIGN KEY(carro_id) REFERENCES carros(id)
+   FOREIGN KEY(carro_id) REFERENCES carros(id) ON DELETE CASCADE
 );
+CREATE UNIQUE INDEX uq_entrada_aberta ON entradas(carro_id) WHERE saida IS NULL;

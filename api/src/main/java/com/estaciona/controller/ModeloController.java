@@ -1,35 +1,35 @@
 package com.estaciona.controller;
 
-import com.estaciona.model.Marca;
-import com.estaciona.service.JpaMarcaService;
+import com.estaciona.model.Modelo;
+import com.estaciona.service.JpaModeloService;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/marcas")
-public class MarcaController extends SupportController<Marca, Short> {
-  public MarcaController(JpaMarcaService service) {
+@RequestMapping("/modelos")
+public class ModeloController extends SupportController<Modelo, Short> {
+  public ModeloController(JpaModeloService service) {
     super(service);
   }
 
   @GetMapping
-  public ResponseEntity<List<Marca>> all() {
+  public ResponseEntity<List<Modelo>> all() {
     return super.all();
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Marca> find(@PathVariable Short id) {
+  public ResponseEntity<Modelo> find(@PathVariable Short id) {
     return super.find(id);
   }
 
   @PostMapping
-  public ResponseEntity<Marca> create(@RequestBody Marca data) {
+  public ResponseEntity<Modelo> create(@RequestBody Modelo data) {
     return super.create(data);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Marca> update(@PathVariable Short id, @RequestBody Marca data) {
+  public ResponseEntity<Modelo> update(@PathVariable Short id, @RequestBody Modelo data) {
     return super.update(id, data);
   }
 
@@ -40,6 +40,6 @@ public class MarcaController extends SupportController<Marca, Short> {
 
   @Override
   protected String getURL() {
-    return "/marcas";
+    return "/modelos";
   }
 }
