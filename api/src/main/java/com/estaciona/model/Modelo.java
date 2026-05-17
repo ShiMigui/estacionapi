@@ -45,10 +45,18 @@ public class Modelo {
   }
 
   public void changeMarca(Marca marca) {
-    if (marca == null) {
-      throw new IllegalArgumentException("Marca não pode ser nula");
+    if (marca == null || marca.getId() == null) {
+      throw new IllegalArgumentException("Marca inválida");
     }
 
     this.marca = marca;
+  }
+
+  public void setId(Short id) {
+    if (this.id != null) {
+      if (this.id == id) return;
+      throw new IllegalArgumentException("ID já foi definido e não pode ser alterado");
+    }
+    this.id = id;
   }
 }

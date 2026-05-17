@@ -43,4 +43,12 @@ public class Marca {
 
     this.nome = nome.trim();
   }
+
+  public void setId(Short id) {
+    if (this.id != null) {
+      if (this.id == id) return;
+      throw new IllegalArgumentException("ID já foi definido e não pode ser alterado");
+    }
+    this.id = id;
+  }
 }
