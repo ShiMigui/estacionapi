@@ -1,45 +1,45 @@
 package com.estaciona.controller;
 
-import com.estaciona.model.IService;
 import com.estaciona.model.Modelo;
 import com.estaciona.service.JpaModeloService;
 import java.util.List;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/modelos")
-public class ModeloController {
-  private final IService<Modelo, Short> service;
-
+public class ModeloController extends SupportController<Modelo, Short> {
   public ModeloController(JpaModeloService service) {
-    this.service = service;
+    super(service);
   }
 
   @GetMapping
   public ResponseEntity<List<Modelo>> all() {
-    return ResponseEntity.ok(service.getAll());
+    return super.all();
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<Modelo> find(@PathVariable Short id) {
-    return service.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    return super.find(id);
   }
 
   @PostMapping
   public ResponseEntity<Modelo> create(@RequestBody Modelo data) {
-    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(data));
+    return super.create(data);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<Modelo> update(@PathVariable Short id, @RequestBody Modelo data) {
-    data.setId(id);
-    return service.update(data).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    return super.update(id, data);
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> delete(@PathVariable Short id) {
-    return (service.delete(id) ? ResponseEntity.noContent() : ResponseEntity.notFound()).build();
+    return super.delete(id);
+  }
+
+  @Override
+  protected String getURL() {
+    return "/modelos";
   }
 }
