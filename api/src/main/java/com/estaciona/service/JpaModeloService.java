@@ -1,23 +1,31 @@
 package com.estaciona.service;
 
+import com.estaciona.model.Marca;
 import com.estaciona.model.Modelo;
 import com.estaciona.repository.ModeloRepository;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
 public class JpaModeloService extends JpaService<Modelo, Short> {
+  private final JpaService<Marca, Short> marcaRepo;
 
-  public JpaModeloService(ModeloRepository repo) {
-    super(repo);
+  public JpaModeloService(ModeloRepository repo, JpaMarcaService marcaRepo) {
+    super(repo, Modelo.class);
+    this.marcaRepo = marcaRepo;
   }
 
-  public Optional<Modelo> update(Modelo newData) {
+  public Modelo update(Modelo newData) {
     return super.update(
         newData.getId(),
         m -> {
-          m.rename(newData.getNome());
-          m.changeMarca(newData.getMarca());
+          String nome = newData.getNome();
+          Marca marca = newData.getMarca();
+
+          if (nome != null) m.rename(nome);
+
+          if (marca != null && marca.getId() != null)
+            m.changeMarca(marcaRepo.findById(marca.getId()));
+
           return m;
         });
   }
