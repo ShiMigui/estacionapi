@@ -3,6 +3,7 @@ package com.estaciona.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class Modelo extends AbstractEntity<Short> {
   @Column(nullable = false)
   private String nome;
 
+  @NotNull
   @JsonIgnoreProperties("modelos")
   @JoinColumn(name = "marca_id", nullable = false)
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
