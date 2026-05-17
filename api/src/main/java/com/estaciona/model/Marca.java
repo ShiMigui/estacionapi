@@ -1,39 +1,40 @@
 package com.estaciona.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.*;
 
 @Entity
-@Table(name = "marcas")
 @Getter
+@NoArgsConstructor
+@Table(name = "marcas")
 @ToString(onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Marca {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @EqualsAndHashCode.Include
   @ToString.Include
   @Column(nullable = false)
+  @EqualsAndHashCode.Include
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Short id;
 
-  @ToString.Include
   @NotBlank
   @Size(max = 32)
   @Column(nullable = false, unique = true)
   private String nome;
 
+  @JsonIgnoreProperties("marca")
+  @OneToMany(mappedBy = "marca", fetch = FetchType.EAGER)
+  private List<Modelo> modelos = new ArrayList<>();
+
   public Marca(Short id, String nome) {
     this.id = id;
     this.rename(nome);
   }
-
-  public Marca(String nome) {
-    this.rename(nome);
-  }
-
-  protected Marca() {}
 
   public void rename(String nome) {
     if (nome == null || nome.isBlank()) {
