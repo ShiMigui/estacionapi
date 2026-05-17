@@ -18,7 +18,7 @@ public class ModeloController {
   }
 
   @GetMapping
-  public ResponseEntity<List<Modelo>> allMarcas() {
+  public ResponseEntity<List<Modelo>> all() {
     return ResponseEntity.ok(service.getAll());
   }
 
@@ -28,17 +28,18 @@ public class ModeloController {
   }
 
   @PostMapping
-  public ResponseEntity<Modelo> createMarca(@RequestBody Modelo data) {
+  public ResponseEntity<Modelo> create(@RequestBody Modelo data) {
     return ResponseEntity.status(HttpStatus.CREATED).body(service.save(data));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Modelo> updateUser(@PathVariable Short id, @RequestBody Modelo data) {
+  public ResponseEntity<Modelo> update(@PathVariable Short id, @RequestBody Modelo data) {
+    data.setId(id);
     return service.update(data).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteMarca(@PathVariable Short id) {
+  public ResponseEntity<Void> delete(@PathVariable Short id) {
     return (service.delete(id) ? ResponseEntity.noContent() : ResponseEntity.notFound()).build();
   }
 }

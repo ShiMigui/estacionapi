@@ -18,7 +18,7 @@ public class MarcaController {
   }
 
   @GetMapping
-  public ResponseEntity<List<Marca>> allMarcas() {
+  public ResponseEntity<List<Marca>> all() {
     return ResponseEntity.ok(service.getAll());
   }
 
@@ -28,17 +28,18 @@ public class MarcaController {
   }
 
   @PostMapping
-  public ResponseEntity<Marca> createMarca(@RequestBody Marca data) {
+  public ResponseEntity<Marca> create(@RequestBody Marca data) {
     return ResponseEntity.status(HttpStatus.CREATED).body(service.save(data));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Marca> updateUser(@PathVariable Short id, @RequestBody Marca data) {
+  public ResponseEntity<Marca> update(@PathVariable Short id, @RequestBody Marca data) {
+    data.setId(id);
     return service.update(data).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteMarca(@PathVariable Short id) {
+  public ResponseEntity<Void> delete(@PathVariable Short id) {
     return (service.delete(id) ? ResponseEntity.noContent() : ResponseEntity.notFound()).build();
   }
 }
