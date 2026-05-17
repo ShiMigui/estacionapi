@@ -22,8 +22,8 @@ public abstract class JpaService<E extends AbstractEntity<ID>, ID> implements IS
     return repo.findById(id).orElseThrow(() -> new EntityNotFoundException(entityClass, id));
   }
 
-  public E save(E marca) {
-    return repo.save(marca);
+  public E save(E obj) {
+    return repo.save(obj);
   }
 
   public List<E> getAll() {
