@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JpaModeloService extends JpaService<Modelo, Short> {
-  private final JpaService<Marca, Short> marcaRepo;
+  private final JpaService<Marca, Short> marcaService;
 
-  public JpaModeloService(ModeloRepository repo, JpaMarcaService marcaRepo) {
+  public JpaModeloService(ModeloRepository repo, JpaMarcaService marcaService) {
     super(repo, Modelo.class);
-    this.marcaRepo = marcaRepo;
+    this.marcaService = marcaService;
   }
 
   public Modelo update(Modelo newData) {
@@ -24,9 +24,18 @@ public class JpaModeloService extends JpaService<Modelo, Short> {
           if (nome != null) m.rename(nome);
 
           if (marca != null && marca.getId() != null)
-            m.changeMarca(marcaRepo.findById(marca.getId()));
+            m.changeMarca(marcaService.findById(marca.getId()));
 
           return m;
         });
+  }
+
+  @Override
+  public Modelo save(Modelo obj) {
+    Marca marca = obj.getMarca();
+    if (marca == null || marca.getId() == null)
+      throw new IllegalArgumentException("Modelo deve conter o ID da marca");
+    obj.changeMarca(marcaService.findById(marca.getId()));
+    return super.save(obj);
   }
 }
