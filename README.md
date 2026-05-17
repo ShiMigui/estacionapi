@@ -43,14 +43,28 @@ http://localhost:8080
 
 ### Marca
 
+Endpoint: `/marcas`
+
 | METHOD | PATH | DESCRIPTION |
 |---|---|---|
-| GET | `/marcas` | Retrieve all `Marca` entities. |
-| GET | `/marcas/{id}` | Retrieve a `Marca` by ID. |
-| POST | `/marcas` | Create a new `Marca`. |
-| PUT | `/marcas/{id}` | Update an existing `Marca`. |
+| GET | - | Retrieve all `Marca` entities. |
+| GET | `/{id}` | Retrieve a `Marca` by ID. |
+| POST | - | Create a new `Marca`. |
+| PUT | `/{id}` | Update an existing `Marca`. |
+| DELETE | `/{id}` | Delete an existing `Marca`, otherwise responds _Not Found_ |
+
+### Modelo
+
+Endpoint: `/modelos`
+
+| METHOD | PATH | DESCRIPTION |
+|---|---|---|
+| GET | - | Retrieve all `Modelo` entities. |
+| GET | `/{id}` | Retrieve a `Modelo` by ID. |
+| POST | - | Create a new `Modelo`. |
+| PUT | `/{id}` | Update an existing `Modelo`. |
+| DELETE | `/{id}` | Delete an existing `Modelo`, otherwise responds _Not Found_. |
 
 ## License
 
 This project is licensed under MIT.
-
