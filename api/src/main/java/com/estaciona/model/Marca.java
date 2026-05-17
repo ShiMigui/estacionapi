@@ -1,6 +1,7 @@
 package com.estaciona.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -18,9 +19,15 @@ public class Marca {
   private Short id;
 
   @ToString.Include
-  @Column(nullable = false, unique = true)
+  @NotBlank
   @Size(max = 32)
+  @Column(nullable = false, unique = true)
   private String nome;
+
+  public Marca(Short id, String nome) {
+    this.id = id;
+    this.rename(nome);
+  }
 
   public Marca(String nome) {
     this.rename(nome);
