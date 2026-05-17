@@ -14,7 +14,7 @@ import lombok.*;
     uniqueConstraints = {@UniqueConstraint(columnNames = {"nome", "marca_id"})})
 @ToString(onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Modelo {
+public class Modelo extends AbstractEntity<Short> {
   @Id
   @ToString.Include
   @Column(nullable = false)
@@ -32,15 +32,10 @@ public class Modelo {
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
   private Marca marca;
 
-  public Modelo(String nome) {
-    this.rename(nome);
-  }
-
   public void rename(String nome) {
     if (nome == null || nome.isBlank()) {
       throw new IllegalArgumentException("Nome não pode ser vazio");
     }
-
     this.nome = nome.trim();
   }
 
@@ -48,15 +43,11 @@ public class Modelo {
     if (marca == null || marca.getId() == null) {
       throw new IllegalArgumentException("Marca inválida");
     }
-
     this.marca = marca;
   }
 
-  public void setId(Short id) {
-    if (this.id != null) {
-      if (this.id == id) return;
-      throw new IllegalArgumentException("ID já foi definido e não pode ser alterado");
-    }
+  @Override
+  protected void internalSetId(Short id) {
     this.id = id;
   }
 }

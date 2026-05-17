@@ -14,7 +14,7 @@ import lombok.*;
 @Table(name = "marcas")
 @ToString(onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Marca {
+public class Marca extends AbstractEntity<Short> {
   @Id
   @ToString.Include
   @Column(nullable = false)
@@ -31,11 +31,6 @@ public class Marca {
   @OneToMany(mappedBy = "marca", fetch = FetchType.EAGER)
   private List<Modelo> modelos = new ArrayList<>();
 
-  public Marca(Short id, String nome) {
-    this.id = id;
-    this.rename(nome);
-  }
-
   public void rename(String nome) {
     if (nome == null || nome.isBlank()) {
       throw new IllegalArgumentException("Nome não pode ser vazio");
@@ -44,11 +39,8 @@ public class Marca {
     this.nome = nome.trim();
   }
 
-  public void setId(Short id) {
-    if (this.id != null) {
-      if (this.id == id) return;
-      throw new IllegalArgumentException("ID já foi definido e não pode ser alterado");
-    }
+  @Override
+  protected void internalSetId(Short id) {
     this.id = id;
   }
 }
