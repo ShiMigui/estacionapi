@@ -4,9 +4,7 @@ import com.estaciona.model.AbstractEntity;
 import com.estaciona.model.IService;
 import java.net.URI;
 import java.util.List;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.server.ResponseStatusException;
 
 public abstract class SupportController<E extends AbstractEntity<ID>, ID> {
   protected final IService<E, ID> service;
@@ -26,11 +24,7 @@ public abstract class SupportController<E extends AbstractEntity<ID>, ID> {
   }
 
   protected ResponseEntity<E> create(E data) {
-    if (data.getId() != null) {
-      throw new ResponseStatusException(
-          HttpStatus.BAD_REQUEST, "ID must not be provided on create");
-    }
-    E saved = service.save(data);
+    E saved = service.create(data);
     URI uri = URI.create(getURL() + "/" + saved.getId());
     return ResponseEntity.created(uri).body(saved);
   }
