@@ -2,14 +2,14 @@ package com.estaciona.service;
 
 import com.estaciona.model.Marca;
 import com.estaciona.model.Modelo;
-import com.estaciona.repository.ModeloRepository;
+import com.estaciona.repository.ModeloJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class JpaModeloService extends JpaService<Modelo, Short> {
   private final JpaService<Marca, Short> marcaService;
 
-  public JpaModeloService(ModeloRepository repo, JpaMarcaService marcaService) {
+  public JpaModeloService(ModeloJpaRepository repo, JpaMarcaService marcaService) {
     super(repo, Modelo.class);
     this.marcaService = marcaService;
   }
@@ -31,11 +31,12 @@ public class JpaModeloService extends JpaService<Modelo, Short> {
   }
 
   @Override
-  public Modelo save(Modelo obj) {
+  public Modelo create(Modelo obj) {
+    obj.rename(obj.getNome());
     Marca marca = obj.getMarca();
     if (marca == null || marca.getId() == null)
       throw new IllegalArgumentException("Modelo deve conter o ID da marca");
     obj.changeMarca(marcaService.findById(marca.getId()));
-    return super.save(obj);
+    return super.create(obj);
   }
 }
