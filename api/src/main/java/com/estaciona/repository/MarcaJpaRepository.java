@@ -1,8 +1,8 @@
 package com.estaciona.repository;
 
-import com.estaciona.model.Modelo;
+import com.estaciona.model.Marca;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ModeloRepository extends JpaRepository<Modelo, Short> {}
+public interface MarcaJpaRepository extends JpaRepository<Marca, Short> {}
