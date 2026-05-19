@@ -1,5 +1,6 @@
 package com.estaciona.model;
 
+import com.estaciona.exception.domain.ValidationException;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
@@ -12,7 +13,7 @@ public abstract class AbstractEntity<ID> {
     ID current = getId();
     if (current != null) {
       if (current.equals(id)) return;
-      throw new IllegalArgumentException("ID já foi definido e não pode ser alterado");
+      throw new ValidationException("ID já foi definido e não pode ser alterado");
     }
     internalSetId(id);
   }

@@ -1,5 +1,6 @@
 package com.estaciona.model;
 
+import com.estaciona.exception.domain.ValidationException;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -36,14 +37,14 @@ public class Modelo extends AbstractEntity<Short> {
 
   public void rename(String nome) {
     if (nome == null || nome.isBlank()) {
-      throw new IllegalArgumentException("Nome não pode ser vazio");
+      throw new ValidationException("Nome não pode ser vazio");
     }
     this.nome = nome.trim();
   }
 
   public void changeMarca(Marca marca) {
     if (marca == null || marca.getId() == null) {
-      throw new IllegalArgumentException("Marca inválida");
+      throw new ValidationException("Marca inválida");
     }
     this.marca = marca;
   }

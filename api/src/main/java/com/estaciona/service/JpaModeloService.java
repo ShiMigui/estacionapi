@@ -1,5 +1,6 @@
 package com.estaciona.service;
 
+import com.estaciona.exception.domain.ValidationException;
 import com.estaciona.model.Marca;
 import com.estaciona.model.Modelo;
 import com.estaciona.repository.ModeloJpaRepository;
@@ -35,7 +36,7 @@ public class JpaModeloService extends JpaService<Modelo, Short> {
     obj.rename(obj.getNome());
     Marca marca = obj.getMarca();
     if (marca == null || marca.getId() == null)
-      throw new IllegalArgumentException("Modelo deve conter o ID da marca");
+      throw new ValidationException("Modelo deve conter o ID da marca");
     obj.changeMarca(marcaService.findById(marca.getId()));
     return super.create(obj);
   }
