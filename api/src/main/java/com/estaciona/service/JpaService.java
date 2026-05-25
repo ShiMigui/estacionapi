@@ -1,6 +1,7 @@
 package com.estaciona.service;
 
 import com.estaciona.exception.domain.EntityNotFoundException;
+import com.estaciona.exception.domain.ValidationException;
 import com.estaciona.model.AbstractEntity;
 import com.estaciona.model.IService;
 import java.util.List;
@@ -18,12 +19,13 @@ public abstract class JpaService<E extends AbstractEntity<ID>, ID> implements IS
     this.entityClass = entityClass;
   }
 
-  public E findById(ID id) {
-    return repo.findById(id).orElseThrow(() -> new EntityNotFoundException(entityClass, id));
+  public E create(E obj) {
+    if (obj.getId() != null) throw new ValidationException("ID must not be provided on create");
+    return repo.save(obj);
   }
 
-  public E save(E obj) {
-    return repo.save(obj);
+  public E findById(ID id) {
+    return repo.findById(id).orElseThrow(() -> new EntityNotFoundException(entityClass, id));
   }
 
   public List<E> getAll() {

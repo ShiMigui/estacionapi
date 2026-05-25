@@ -1,12 +1,12 @@
 package com.estaciona.service;
 
 import com.estaciona.model.Marca;
-import com.estaciona.repository.MarcaRepository;
+import com.estaciona.repository.MarcaJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class JpaMarcaService extends JpaService<Marca, Short> {
-  public JpaMarcaService(MarcaRepository repo) {
+  public JpaMarcaService(MarcaJpaRepository repo) {
     super(repo, Marca.class);
   }
 
@@ -18,5 +18,11 @@ public class JpaMarcaService extends JpaService<Marca, Short> {
           m.rename(newData.getNome());
           return m;
         });
+  }
+
+  @Override
+  public Marca create(Marca obj) {
+    obj.rename(obj.getNome());
+    return super.create(obj);
   }
 }

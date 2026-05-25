@@ -1,5 +1,6 @@
 package com.estaciona.model;
 
+import com.estaciona.exception.domain.ValidationException;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -28,12 +29,12 @@ public class Marca extends AbstractEntity<Short> {
   private String nome;
 
   @JsonIgnoreProperties("marca")
-  @OneToMany(mappedBy = "marca", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
   private List<Modelo> modelos = new ArrayList<>();
 
   public void rename(String nome) {
     if (nome == null || nome.isBlank()) {
-      throw new IllegalArgumentException("Nome não pode ser vazio");
+      throw new ValidationException("Nome não pode ser vazio");
     }
 
     this.nome = nome.trim();

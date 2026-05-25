@@ -1,30 +1,12 @@
 CREATE TABLE marcas (
-<<<<<<< Updated upstream
-   id SMALLSERIAL,
-<<<<<<< Updated upstream
-   nome VARCHAR(32) UNIQUE NOT NULL,
-=======
-   nome VARCHAR(32),
-=======
    id SMALLINT GENERATED ALWAYS AS IDENTITY,
    nome VARCHAR(32) UNIQUE NOT NULL,
->>>>>>> Stashed changes
->>>>>>> Stashed changes
    PRIMARY KEY(id)
 );
 
 CREATE TABLE modelos (
-<<<<<<< Updated upstream
-   id SMALLSERIAL,
-<<<<<<< Updated upstream
-   nome VARCHAR(32) NOT NULL,
-=======
-   nome VARCHAR(32),
-=======
    id SMALLINT GENERATED ALWAYS AS IDENTITY,
    nome VARCHAR(32) NOT NULL,
->>>>>>> Stashed changes
->>>>>>> Stashed changes
    marca_id SMALLINT NOT NULL,
    PRIMARY KEY (id),
    CONSTRAINT uq_modelo_marca UNIQUE(nome, marca_id),
@@ -39,17 +21,8 @@ CREATE TABLE clientes (
 );
 
 CREATE TABLE carros (
-<<<<<<< Updated upstream
-   id SERIAL,
-<<<<<<< Updated upstream
-   placa CHAR(7) UNIQUE NOT NULL,
-=======
-   placa VARCHAR(7) UNIQUE NOT NULL,
-=======
    id INTEGER GENERATED ALWAYS AS IDENTITY,
    placa CHAR(7) UNIQUE NOT NULL,
->>>>>>> Stashed changes
->>>>>>> Stashed changes
    cor SMALLINT NOT NULL,
    modelo_id SMALLINT NOT NULL,
    PRIMARY KEY(id),
@@ -65,20 +38,9 @@ CREATE TABLE responsaveis_carros (
 );
 
 CREATE TABLE precos (
-<<<<<<< Updated upstream
-   id SMALLSERIAL,
-<<<<<<< Updated upstream
-   preco DECIMAL(10, 2) NOT NULL CHECK(preco >= 0),
-   nome VARCHAR(100) NOT NULL,
-=======
-   preco DECIMAL(10, 2),
-   nome VARCHAR(100),
-=======
    id SMALLINT GENERATED ALWAYS AS IDENTITY,
    preco DECIMAL(10, 2) NOT NULL CHECK(preco >= 0),
    nome VARCHAR(100) NOT NULL,
->>>>>>> Stashed changes
->>>>>>> Stashed changes
    descricao TEXT,
    PRIMARY KEY(id)
 );
@@ -92,4 +54,7 @@ CREATE TABLE entradas (
    PRIMARY KEY(carro_id, entrada),
    FOREIGN KEY(carro_id) REFERENCES carros(id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX uq_entrada_aberta ON entradas(carro_id) WHERE saida IS NULL;
+
+CREATE UNIQUE INDEX uq_entrada_aberta
+ON entradas(carro_id)
+WHERE saida IS NULL;

@@ -5,7 +5,7 @@ import java.util.List;
 public interface IService<Entity extends AbstractEntity<ID>, ID> {
   public Entity findById(ID id);
 
-  public Entity save(Entity obj);
+  public Entity create(Entity obj);
 
   public List<Entity> getAll();
 
