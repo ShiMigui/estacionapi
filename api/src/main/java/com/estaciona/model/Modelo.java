@@ -32,7 +32,7 @@ public class Modelo extends AbstractEntity<Short> {
   @NotNull
   @JsonIgnoreProperties("modelos")
   @JoinColumn(name = "marca_id", nullable = false)
-  @ManyToOne(fetch = FetchType.EAGER, optional = false)
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
   private Marca marca;
 
   public void rename(String nome) {
