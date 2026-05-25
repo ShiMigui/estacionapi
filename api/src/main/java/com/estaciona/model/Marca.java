@@ -29,7 +29,7 @@ public class Marca extends AbstractEntity<Short> {
   private String nome;
 
   @JsonIgnoreProperties("marca")
-  @OneToMany(mappedBy = "marca", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
   private List<Modelo> modelos = new ArrayList<>();
 
   public void rename(String nome) {
