@@ -1,8 +1,11 @@
 package com.estaciona.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.*;
 
 @Entity
@@ -42,6 +45,14 @@ public class Cliente extends AbstractEntity<Long> {
 
     this.telefone = telefone;
   }
+
+  @ManyToMany
+  @JoinTable(
+      name = "responsaveis_carros",
+      joinColumns = @JoinColumn(name = "cliente_id"),
+      inverseJoinColumns = @JoinColumn(name = "carro_id"))
+  @JsonIgnoreProperties("responsaveis")
+  private Set<Carro> carros = new HashSet<>();
 
   @Override
   protected void internalSetId(Long id) {
