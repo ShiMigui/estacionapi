@@ -1,5 +1,6 @@
-package com.estaciona.model;
+package com.estaciona.model.interfaces;
 
+import com.estaciona.model.AbstractEntity;
 import java.util.List;
 
 public interface IService<Entity extends AbstractEntity<ID>, ID> {
