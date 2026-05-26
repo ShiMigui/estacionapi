@@ -2,8 +2,6 @@ services:
   api:
     build:
       dockerfile: dev.Dockerfile
-    environment:
-      SPRING_PROFILES_ACTIVE: dev
     volumes:
       - ./api/src:/app/src
       - ./api/build:/app/build
