@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MarcaJpaRepository extends JpaRepository<Marca, Short> {
+public interface MarcaRepository extends JpaRepository<Marca, Short> {
   @Query("SELECT DISTINCT m FROM Marca m LEFT JOIN FETCH m.modelos")
   @Override
   List<Marca> findAll();
