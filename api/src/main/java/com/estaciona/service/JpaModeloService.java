@@ -38,6 +38,6 @@ public class JpaModeloService extends JpaService<Modelo, Short> {
     if (marca == null || marca.getId() == null)
       throw new ValidationException("Modelo deve conter o ID da marca");
     obj.changeMarca(marcaService.findById(marca.getId()));
-    return super.create(obj);
+    return repo.save(obj);
   }
 }
