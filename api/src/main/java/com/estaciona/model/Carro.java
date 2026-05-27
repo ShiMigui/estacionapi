@@ -2,13 +2,10 @@ package com.estaciona.model;
 
 import com.estaciona.model.converter.CorConverter;
 import com.estaciona.model.enums.Cor;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,14 +39,6 @@ public class Carro extends AbstractEntity<Long> {
   @JoinColumn(name = "modelo_id", nullable = false)
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   private Modelo modelo;
-
-  @ManyToMany
-  @JoinTable(
-      name = "responsaveis_carros",
-      joinColumns = @JoinColumn(name = "carro_id"),
-      inverseJoinColumns = @JoinColumn(name = "cliente_id"))
-  @JsonIgnoreProperties("carros")
-  private Set<Cliente> responsaveis = new HashSet<>();
 
   public void setPlaca(String placa) {
     if (placa == null || !placa.matches("([A-Z]{3}[0-9]{4})|([A-Z]{3}[0-9][A-Z][0-9]{2})"))
