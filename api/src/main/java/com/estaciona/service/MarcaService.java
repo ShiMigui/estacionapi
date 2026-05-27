@@ -5,8 +5,8 @@ import com.estaciona.repository.MarcaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JpaMarcaService extends JpaService<Marca, Short> {
-  public JpaMarcaService(MarcaRepository repo) {
+public class MarcaService extends AbstractService<Marca, Short> {
+  public MarcaService(MarcaRepository repo) {
     super(repo, Marca.class);
   }
 

@@ -1,7 +1,7 @@
 package com.estaciona.controller;
 
 import com.estaciona.model.Marca;
-import com.estaciona.service.JpaMarcaService;
+import com.estaciona.service.MarcaService;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/marcas")
 public class MarcaController extends SupportController<Marca, Short> {
-  public MarcaController(JpaMarcaService service) {
+  public MarcaController(MarcaService service) {
     super(service);
   }
 

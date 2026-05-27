@@ -5,8 +5,8 @@ import com.estaciona.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JpaClienteService extends JpaService<Cliente, Long> {
-  public JpaClienteService(ClienteRepository repo) {
+public class ClienteService extends AbstractService<Cliente, Long> {
+  public ClienteService(ClienteRepository repo) {
     super(repo, Cliente.class);
   }
 

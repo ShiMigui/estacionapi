@@ -1,7 +1,7 @@
 package com.estaciona.controller;
 
 import com.estaciona.model.Modelo;
-import com.estaciona.service.JpaModeloService;
+import com.estaciona.service.ModeloService;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/modelos")
 public class ModeloController extends SupportController<Modelo, Short> {
-  public ModeloController(JpaModeloService service) {
+  public ModeloController(ModeloService service) {
     super(service);
   }
 

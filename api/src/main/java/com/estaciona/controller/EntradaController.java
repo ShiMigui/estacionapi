@@ -2,7 +2,7 @@ package com.estaciona.controller;
 
 import com.estaciona.model.Entrada;
 import com.estaciona.model.id.EntradaId;
-import com.estaciona.service.JpaEntradaService;
+import com.estaciona.service.EntradaService;
 import java.time.OffsetDateTime;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/entradas")
 public class EntradaController extends SupportController<Entrada, EntradaId> {
-  public EntradaController(JpaEntradaService service) {
+  public EntradaController(EntradaService service) {
     super(service);
   }
 

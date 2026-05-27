@@ -1,7 +1,7 @@
 package com.estaciona.controller;
 
 import com.estaciona.model.Cliente;
-import com.estaciona.service.JpaClienteService;
+import com.estaciona.service.ClienteService;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController extends SupportController<Cliente, Long> {
-  public ClienteController(JpaClienteService service) {
+  public ClienteController(ClienteService service) {
     super(service);
   }
 

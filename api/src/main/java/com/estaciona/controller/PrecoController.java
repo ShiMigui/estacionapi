@@ -1,7 +1,7 @@
 package com.estaciona.controller;
 
 import com.estaciona.model.Preco;
-import com.estaciona.service.JpaPrecoService;
+import com.estaciona.service.PrecoService;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/precos")
 public class PrecoController extends SupportController<Preco, Short> {
-  public PrecoController(JpaPrecoService service) {
+  public PrecoController(PrecoService service) {
     super(service);
   }
 

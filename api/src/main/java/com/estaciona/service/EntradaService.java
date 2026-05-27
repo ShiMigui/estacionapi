@@ -12,16 +12,13 @@ import java.time.OffsetDateTime;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JpaEntradaService extends JpaService<Entrada, EntradaId> {
+public class EntradaService extends AbstractService<Entrada, EntradaId> {
   private final IService<Carro, Long> carros;
   private final IService<Cliente, Long> clientes;
   private final IService<Preco, Short> precos;
 
-  public JpaEntradaService(
-      EntradaRepository repo,
-      JpaCarroService carros,
-      JpaClienteService clientes,
-      JpaPrecoService precos) {
+  public EntradaService(
+      EntradaRepository repo, CarroService carros, ClienteService clientes, PrecoService precos) {
     super(repo, Entrada.class);
     this.carros = carros;
     this.clientes = clientes;

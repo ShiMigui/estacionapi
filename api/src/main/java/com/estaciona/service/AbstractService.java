@@ -7,14 +7,12 @@ import com.estaciona.model.interfaces.IService;
 import java.util.List;
 import java.util.function.Function;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 
-@Service
-public abstract class JpaService<E extends AbstractEntity<ID>, ID> implements IService<E, ID> {
+public abstract class AbstractService<E extends AbstractEntity<ID>, ID> implements IService<E, ID> {
   protected final JpaRepository<E, ID> repo;
   protected final Class<E> entityClass;
 
-  public JpaService(JpaRepository<E, ID> repo, Class<E> entityClass) {
+  public AbstractService(JpaRepository<E, ID> repo, Class<E> entityClass) {
     this.repo = repo;
     this.entityClass = entityClass;
   }
@@ -37,9 +35,7 @@ public abstract class JpaService<E extends AbstractEntity<ID>, ID> implements IS
   }
 
   public boolean delete(ID id) {
-    if (!repo.existsById(id)) {
-      return false;
-    }
+    if (!repo.existsById(id)) return false;
     repo.deleteById(id);
     return true;
   }

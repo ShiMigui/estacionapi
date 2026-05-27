@@ -9,10 +9,10 @@ import com.estaciona.repository.CarroRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JpaCarroService extends JpaService<Carro, Long> {
+public class CarroService extends AbstractService<Carro, Long> {
   private final IService<Modelo, Short> modelos;
 
-  public JpaCarroService(CarroRepository repo, JpaModeloService modelos) {
+  public CarroService(CarroRepository repo, ModeloService modelos) {
     super(repo, Carro.class);
     this.modelos = modelos;
   }

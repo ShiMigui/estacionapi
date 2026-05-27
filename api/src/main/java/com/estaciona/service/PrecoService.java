@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JpaPrecoService extends JpaService<Preco, Short> {
-  public JpaPrecoService(PrecoRepository repo) {
+public class PrecoService extends AbstractService<Preco, Short> {
+  public PrecoService(PrecoRepository repo) {
     super(repo, Preco.class);
   }
 

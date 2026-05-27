@@ -3,14 +3,15 @@ package com.estaciona.service;
 import com.estaciona.exception.domain.ValidationException;
 import com.estaciona.model.Marca;
 import com.estaciona.model.Modelo;
+import com.estaciona.model.interfaces.IService;
 import com.estaciona.repository.ModeloRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JpaModeloService extends JpaService<Modelo, Short> {
-  private final JpaService<Marca, Short> marcaService;
+public class ModeloService extends AbstractService<Modelo, Short> {
+  private final IService<Marca, Short> marcaService;
 
-  public JpaModeloService(ModeloRepository repo, JpaMarcaService marcaService) {
+  public ModeloService(ModeloRepository repo, MarcaService marcaService) {
     super(repo, Modelo.class);
     this.marcaService = marcaService;
   }
