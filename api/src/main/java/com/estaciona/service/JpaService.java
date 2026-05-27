@@ -3,7 +3,7 @@ package com.estaciona.service;
 import com.estaciona.exception.domain.EntityNotFoundException;
 import com.estaciona.exception.domain.ValidationException;
 import com.estaciona.model.AbstractEntity;
-import com.estaciona.model.IService;
+import com.estaciona.model.interfaces.IService;
 import java.util.List;
 import java.util.function.Function;
 import org.springframework.data.jpa.repository.JpaRepository;

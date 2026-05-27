@@ -1,7 +1,7 @@
 package com.estaciona.controller;
 
 import com.estaciona.model.AbstractEntity;
-import com.estaciona.model.IService;
+import com.estaciona.model.interfaces.IService;
 import java.net.URI;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
