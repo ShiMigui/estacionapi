@@ -1,6 +1,7 @@
 package com.estaciona.exception;
 
 import com.estaciona.exception.domain.EntityNotFoundException;
+import com.estaciona.exception.domain.ValidationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,11 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(EntityNotFoundException.class)
   public ResponseEntity<String> handleNotFoundEntity(EntityNotFoundException ex) {
+    return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler(ValidationException.class)
+  public ResponseEntity<String> handleException(ValidationException ex) {
     return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
   }
 
