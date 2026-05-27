@@ -13,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "precos")
 @ToString(onlyExplicitlyIncluded = true)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Preco extends AbstractEntity<Short> {
   @Id
   @ToString.Include

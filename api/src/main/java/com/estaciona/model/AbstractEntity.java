@@ -9,6 +9,12 @@ public abstract class AbstractEntity<ID> {
 
   protected abstract void internalSetId(ID id);
 
+  public ID id() {
+    ID id = getId();
+    if (id == null) throw new ValidationException("ID must not be null!");
+    return id;
+  }
+
   public void setId(ID id) {
     ID current = getId();
     if (current != null) {

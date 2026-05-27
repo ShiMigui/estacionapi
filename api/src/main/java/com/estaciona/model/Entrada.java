@@ -14,7 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "entradas")
 @ToString(onlyExplicitlyIncluded = true)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Entrada extends AbstractEntity<EntradaId> {
   @EmbeddedId private EntradaId id;
 

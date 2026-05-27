@@ -15,7 +15,7 @@ import lombok.*;
     name = "modelos",
     uniqueConstraints = {@UniqueConstraint(columnNames = {"nome", "marca_id"})})
 @ToString(onlyExplicitlyIncluded = true)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Modelo extends AbstractEntity<Short> {
   @Id
   @ToString.Include
@@ -35,7 +35,7 @@ public class Modelo extends AbstractEntity<Short> {
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   private Marca marca;
 
-  public void rename(String nome) {
+  public void changeNome(String nome) {
     if (nome == null || nome.isBlank()) {
       throw new ValidationException("Nome não pode ser vazio");
     }

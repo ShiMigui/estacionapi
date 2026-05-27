@@ -14,7 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "marcas")
 @ToString(onlyExplicitlyIncluded = true)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Marca extends AbstractEntity<Short> {
   @Id
   @ToString.Include
@@ -28,11 +28,15 @@ public class Marca extends AbstractEntity<Short> {
   @Column(nullable = false, unique = true)
   private String nome;
 
+  public Marca(Short id) {
+    this.setId(id);
+  }
+
   @JsonIgnoreProperties("marca")
   @OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
   private List<Modelo> modelos = new ArrayList<>();
 
-  public void rename(String nome) {
+  public void changeNome(String nome) {
     if (nome == null || nome.isBlank()) {
       throw new ValidationException("Nome não pode ser vazio");
     }

@@ -16,7 +16,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Table(name = "carros")
 @ToString(onlyExplicitlyIncluded = true)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Carro extends AbstractEntity<Long> {
   @Id
   @ToString.Include
