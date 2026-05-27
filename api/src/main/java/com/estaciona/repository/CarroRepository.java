@@ -11,14 +11,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CarroRepository extends JpaRepository<Carro, Long> {
   @Override
-  @Query(
-      "SELECT DISTINCT c FROM Carro c JOIN FETCH c.modelo m JOIN FETCH m.marca LEFT JOIN FETCH"
-          + " c.responsaveis")
+  @Query("SELECT DISTINCT c FROM Carro c JOIN FETCH c.modelo m JOIN FETCH m.marca")
   List<Carro> findAll();
 
   @Override
-  @Query(
-      "SELECT DISTINCT c FROM Carro c JOIN FETCH c.modelo m JOIN FETCH m.marca LEFT JOIN FETCH"
-          + " c.responsaveis WHERE c.id = :id")
+  @Query("SELECT DISTINCT c FROM Carro c JOIN FETCH c.modelo m JOIN FETCH m.marca WHERE c.id = :id")
   Optional<Carro> findById(@Param("id") Long id);
 }
