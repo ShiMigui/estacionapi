@@ -15,7 +15,7 @@ public abstract class AbstractEntity<ID> {
     return id;
   }
 
-  public void setId(ID id) {
+  public void changeId(ID id) {
     ID current = getId();
     if (current != null) {
       if (current.equals(id)) return;

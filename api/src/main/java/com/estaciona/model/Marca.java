@@ -28,10 +28,6 @@ public class Marca extends AbstractEntity<Short> {
   @Column(nullable = false, unique = true)
   private String nome;
 
-  public Marca(Short id) {
-    this.setId(id);
-  }
-
   @JsonIgnoreProperties("marca")
   @OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
   private List<Modelo> modelos = new ArrayList<>();
