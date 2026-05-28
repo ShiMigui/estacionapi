@@ -1,15 +1,15 @@
 package com.estaciona.repository;
 
 import com.estaciona.model.Modelo;
+import com.estaciona.model.interfaces.IRepository;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ModeloRepository extends JpaRepository<Modelo, Short> {
+public interface ModeloRepository extends IRepository<Modelo, Short> {
   @Query("SELECT DISTINCT m FROM Modelo m LEFT JOIN FETCH m.marca")
   @Override
   List<Modelo> findAll();
