@@ -23,7 +23,7 @@ public class ModeloService extends AbstractService<Modelo, Short> {
           String nome = newData.getNome();
           Marca marca = newData.getMarca();
 
-          if (nome != null) m.rename(nome);
+          if (nome != null) m.changeNome(nome);
 
           if (marca != null && marca.getId() != null)
             m.changeMarca(marcaService.findById(marca.getId()));
@@ -34,7 +34,7 @@ public class ModeloService extends AbstractService<Modelo, Short> {
 
   @Override
   public Modelo create(Modelo obj) {
-    obj.rename(obj.getNome());
+    obj.changeNome(obj.getNome());
     Marca marca = obj.getMarca();
     if (marca == null || marca.getId() == null)
       throw new ValidationException("Modelo deve conter o ID da marca");

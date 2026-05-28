@@ -3,16 +3,16 @@ package com.estaciona.service;
 import com.estaciona.exception.domain.EntityNotFoundException;
 import com.estaciona.exception.domain.ValidationException;
 import com.estaciona.model.AbstractEntity;
+import com.estaciona.model.interfaces.IRepository;
 import com.estaciona.model.interfaces.IService;
 import java.util.List;
 import java.util.function.Function;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class AbstractService<E extends AbstractEntity<ID>, ID> implements IService<E, ID> {
-  protected final JpaRepository<E, ID> repo;
+  protected final IRepository<E, ID> repo;
   protected final Class<E> entityClass;
 
-  public AbstractService(JpaRepository<E, ID> repo, Class<E> entityClass) {
+  public AbstractService(IRepository<E, ID> repo, Class<E> entityClass) {
     this.repo = repo;
     this.entityClass = entityClass;
   }
@@ -26,7 +26,7 @@ public abstract class AbstractService<E extends AbstractEntity<ID>, ID> implemen
     return repo.findById(id).orElseThrow(() -> new EntityNotFoundException(entityClass, id));
   }
 
-  public List<E> getAll() {
+  public List<E> all() {
     return repo.findAll();
   }
 
