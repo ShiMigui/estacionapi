@@ -16,7 +16,7 @@ public abstract class SupportController<E extends AbstractEntity<ID>, ID> {
   protected abstract String getURL();
 
   protected ResponseEntity<List<E>> all() {
-    return ResponseEntity.ok(service.getAll());
+    return ResponseEntity.ok(service.all());
   }
 
   protected ResponseEntity<E> find(ID id) {
@@ -30,7 +30,7 @@ public abstract class SupportController<E extends AbstractEntity<ID>, ID> {
   }
 
   protected ResponseEntity<E> update(ID id, E data) {
-    data.setId(id);
+    data.changeId(id);
     return ResponseEntity.ok(service.update(data));
   }
 
