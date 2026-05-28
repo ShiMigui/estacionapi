@@ -8,7 +8,7 @@ public interface IService<Entity extends AbstractEntity<ID>, ID> {
 
   public Entity create(Entity obj);
 
-  public List<Entity> getAll();
+  public List<Entity> all();
 
   public Entity update(Entity newData);
 
