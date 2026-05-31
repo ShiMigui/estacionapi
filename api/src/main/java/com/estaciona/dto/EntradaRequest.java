@@ -9,6 +9,10 @@ public record EntradaRequest(Long cliente_id, Short preco_id, OffsetDateTime sai
     implements IRequest<Entrada> {
   @Override
   public Entrada entity() {
-    return new Entrada(new Cliente(cliente_id), preco_id, saida);
+    Entrada entrada = new Entrada();
+    if (saida != null) entrada.changeSaida(saida);
+    if (preco_id != null) entrada.changePrecoId(preco_id);
+    if (cliente_id != null) entrada.changeCliente(new Cliente(cliente_id));
+    return entrada;
   }
 }
