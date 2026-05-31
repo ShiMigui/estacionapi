@@ -8,6 +8,9 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASS}
 
+  jackson:
+    default-property-inclusion: non_null
+
   jpa:
     open-in-view: false
 
