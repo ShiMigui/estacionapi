@@ -9,6 +9,10 @@ public record CarroRequest(String placa, Integer cor_id, Short modelo_id)
     implements IRequest<Carro> {
   @Override
   public Carro entity() {
-    return new Carro(placa, Cor.fromId(cor_id), new Modelo(modelo_id));
+    Carro carro = new Carro();
+    if (placa != null) carro.changePlaca(placa);
+    if (cor_id != null) carro.changeCor(Cor.fromId(cor_id));
+    if (modelo_id != null) carro.changeModelo(new Modelo(modelo_id));
+    return carro;
   }
 }
