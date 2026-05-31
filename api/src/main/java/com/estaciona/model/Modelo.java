@@ -32,20 +32,23 @@ public class Modelo extends AbstractEntity<Short> {
   @NotNull
   @JsonIgnoreProperties("modelos")
   @JoinColumn(name = "marca_id", nullable = false)
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   private Marca marca;
 
+  public Modelo(Short id) {
+    this.id = id;
+  }
+
   public void changeNome(String nome) {
-    if (nome == null || nome.isBlank()) {
-      throw new ValidationException("Nome não pode ser vazio");
-    }
-    this.nome = nome.trim();
+    if (nome == null || nome.isBlank()) throw new ValidationException("Nome não pode ser vazio");
+    nome = nome.trim();
+    if (nome.length() > 32)
+      throw new ValidationException("Nome não pode ter mais de 32 caracteres");
+    this.nome = nome;
   }
 
   public void changeMarca(Marca marca) {
-    if (marca == null || marca.getId() == null) {
-      throw new ValidationException("Marca inválida");
-    }
+    if (marca == null || marca.getId() == null) throw new ValidationException("Marca inválida");
     this.marca = marca;
   }
 

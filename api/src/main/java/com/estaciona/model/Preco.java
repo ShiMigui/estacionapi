@@ -33,13 +33,16 @@ public class Preco extends AbstractEntity<Short> {
   @Column(columnDefinition = "TEXT")
   private String descricao;
 
-  public void setPreco(BigDecimal preco) {
-    if (preco == null || preco.compareTo(BigDecimal.ZERO) < 0)
-      throw new ValidationException("Preço não pode ser negativo");
-    this.preco = preco;
+  public Preco(Short id) {
+    this.id = id;
   }
 
-  public void setNome(String nome) {
+  public void changePreco(Double preco) {
+    if (preco == null || preco < 0) throw new ValidationException("Preço não pode ser negativo");
+    this.preco = new BigDecimal(preco);
+  }
+
+  public void changeNome(String nome) {
     if (nome.length() < 10)
       throw new ValidationException("Nome de preco deve conter no mínimo 10 caracteres");
     this.nome = nome;

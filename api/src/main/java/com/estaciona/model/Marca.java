@@ -1,12 +1,7 @@
 package com.estaciona.model;
 
 import com.estaciona.exception.domain.ValidationException;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.*;
 
 @Entity
@@ -23,21 +18,20 @@ public class Marca extends AbstractEntity<Short> {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Short id;
 
-  @NotBlank
-  @Size(max = 32)
   @Column(nullable = false, unique = true)
   private String nome;
 
-  @JsonIgnoreProperties("marca")
-  @OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
-  private List<Modelo> modelos = new ArrayList<>();
+  public Marca(Short id) {
+    this.id = id;
+  }
 
   public void changeNome(String nome) {
-    if (nome == null || nome.isBlank()) {
-      throw new ValidationException("Nome não pode ser vazio");
-    }
+    if (nome == null || nome.isBlank()) throw new ValidationException("Nome não pode ser vazio");
+    nome = nome.trim();
+    if (nome.length() > 32)
+      throw new ValidationException("Nome não pode ter mais de 32 caracteres!");
 
-    this.nome = nome.trim();
+    this.nome = nome;
   }
 
   @Override
