@@ -1,5 +1,7 @@
 package com.estaciona.controller;
 
+import com.estaciona.dto.CarroRequest;
+import com.estaciona.dto.CarroResponse;
 import com.estaciona.model.Carro;
 import com.estaciona.service.CarroService;
 import java.util.List;
@@ -8,28 +10,29 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/carros")
-public class CarroController extends SupportController<Carro, Long> {
+public class CarroController extends SupportController<Carro, Long, CarroRequest, CarroResponse> {
   public CarroController(CarroService service) {
     super(service);
   }
 
   @GetMapping
-  public ResponseEntity<List<Carro>> all() {
+  public ResponseEntity<List<CarroResponse>> all() {
     return super.all();
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Carro> find(@PathVariable Long id) {
+  public ResponseEntity<CarroResponse> find(@PathVariable Long id) {
     return super.find(id);
   }
 
   @PostMapping
-  public ResponseEntity<Carro> create(@RequestBody Carro data) {
+  public ResponseEntity<CarroResponse> create(@RequestBody CarroRequest data) {
     return super.create(data);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Carro> update(@PathVariable Long id, @RequestBody Carro data) {
+  public ResponseEntity<CarroResponse> update(
+      @PathVariable Long id, @RequestBody CarroRequest data) {
     return super.update(id, data);
   }
 
@@ -41,5 +44,10 @@ public class CarroController extends SupportController<Carro, Long> {
   @Override
   protected String getURL() {
     return "/carros";
+  }
+
+  @Override
+  protected CarroResponse toResponse(Carro e) {
+    return CarroResponse.fromEntity(e);
   }
 }

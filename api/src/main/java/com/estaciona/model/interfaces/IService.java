@@ -6,9 +6,11 @@ import java.util.List;
 public interface IService<Entity extends AbstractEntity<ID>, ID> {
   public Entity findById(ID id);
 
+  public Entity findWith(Entity e);
+
   public Entity create(Entity obj);
 
-  public List<Entity> getAll();
+  public List<Entity> all();
 
   public Entity update(Entity newData);
 

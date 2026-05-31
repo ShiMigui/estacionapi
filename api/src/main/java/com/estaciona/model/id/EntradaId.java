@@ -13,9 +13,9 @@ import lombok.*;
 @EqualsAndHashCode
 @Embeddable
 public class EntradaId implements Serializable {
-  @Column(name = "carro_id", nullable = false)
-  private Long carro;
+  @Column(name = "carro_id")
+  private Long carroId;
 
-  @Column(name = "entrada", nullable = false)
+  @Column(name = "entrada")
   private OffsetDateTime entrada;
 }

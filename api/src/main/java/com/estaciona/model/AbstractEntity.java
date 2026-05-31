@@ -15,7 +15,8 @@ public abstract class AbstractEntity<ID> {
     return id;
   }
 
-  public void setId(ID id) {
+  public void changeId(ID id) {
+    if (id == null) throw new ValidationException(this.getClass() + " ID passado é nulo");
     ID current = getId();
     if (current != null) {
       if (current.equals(id)) return;

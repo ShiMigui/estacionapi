@@ -1,5 +1,6 @@
 package com.estaciona.service;
 
+import com.estaciona.exception.domain.EntityNotFoundException;
 import com.estaciona.exception.domain.ValidationException;
 import com.estaciona.model.Carro;
 import com.estaciona.model.Cliente;
@@ -9,13 +10,14 @@ import com.estaciona.model.id.EntradaId;
 import com.estaciona.model.interfaces.IService;
 import com.estaciona.repository.EntradaRepository;
 import java.time.OffsetDateTime;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EntradaService extends AbstractService<Entrada, EntradaId> {
   private final IService<Carro, Long> carros;
-  private final IService<Cliente, Long> clientes;
   private final IService<Preco, Short> precos;
+  private final IService<Cliente, Long> clientes;
 
   public EntradaService(
       EntradaRepository repo, CarroService carros, ClienteService clientes, PrecoService precos) {
@@ -23,6 +25,16 @@ public class EntradaService extends AbstractService<Entrada, EntradaId> {
     this.carros = carros;
     this.clientes = clientes;
     this.precos = precos;
+  }
+
+  public Entrada findByIdAndSaidaIsNull(EntradaId id) {
+    return ((EntradaRepository) repo)
+        .findByIdAndSaidaIsNull(id)
+        .orElseThrow(() -> new EntityNotFoundException(entityClass, id));
+  }
+
+  public List<Entrada> findBySaidaIsNull() {
+    return ((EntradaRepository) repo).findBySaidaIsNull();
   }
 
   @Override
@@ -33,19 +45,20 @@ public class EntradaService extends AbstractService<Entrada, EntradaId> {
           if (entrada.getSaida() != null) throw new IllegalStateException("Entrada já encerrada");
 
           OffsetDateTime saida = newData.getSaida();
-          if (saida != null) entrada.setSaida(saida);
+          if (saida != null) entrada.changeSaida(saida);
 
           Cliente cliente = newData.getCliente();
           if (cliente != null && cliente.getId() != null)
-            entrada.setCliente(clientes.findById(cliente.getId()));
+            entrada.changeCliente(clientes.findWith(cliente));
 
           Short precoId = newData.getPrecoId();
           if (precoId != null) {
             Preco preco = precos.findById(precoId);
-
-            entrada.setPrecoId(precoId);
-            entrada.setPrecoBase(preco.getPreco());
+            entrada.changePrecoId(precoId);
+            entrada.changePrecoBase(preco.getPreco());
           }
+
+          entrada.calcValorTotal();
 
           return entrada;
         });
@@ -53,19 +66,12 @@ public class EntradaService extends AbstractService<Entrada, EntradaId> {
 
   @Override
   public Entrada create(Entrada obj) {
-    if (obj.getPrecoId() == null) throw new ValidationException("Insira um preço válido");
-    if (obj.getEntrada() != null) throw new ValidationException("Carro já tem entrada");
-    obj.setPrecoBase(precos.findById(obj.getPrecoId()).getPreco());
+    Short precoId = obj.getPrecoId();
+    if (precoId == null) throw new ValidationException("Insira um preço válido");
+    obj.changePrecoBase(precos.findById(precoId).getPreco());
 
-    Carro carro = obj.getCarro();
-    Cliente cliente = obj.getCliente();
-    if (carro == null || carro.getId() == null) throw new ValidationException("Carro invalido");
-    if (cliente == null || cliente.getId() == null)
-      throw new ValidationException("Cliente invalido");
+    repo.save(obj);
 
-    obj.setCliente(clientes.findById(cliente.getId()));
-    obj.setCarro(carros.findById(carro.getId()));
-
-    return repo.save(obj);
+    return findWith(obj);
   }
 }

@@ -15,14 +15,14 @@ public class MarcaService extends AbstractService<Marca, Short> {
     return super.update(
         newData.getId(),
         m -> {
-          m.rename(newData.getNome());
+          m.changeNome(newData.getNome());
           return m;
         });
   }
 
   @Override
   public Marca create(Marca obj) {
-    obj.rename(obj.getNome());
+    obj.changeNome(obj.getNome());
     return super.create(obj);
   }
 }
