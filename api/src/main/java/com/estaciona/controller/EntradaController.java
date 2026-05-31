@@ -1,5 +1,7 @@
 package com.estaciona.controller;
 
+import com.estaciona.dto.EntradaRequest;
+import com.estaciona.dto.EntradaResponse;
 import com.estaciona.model.Entrada;
 import com.estaciona.model.id.EntradaId;
 import com.estaciona.service.EntradaService;
@@ -10,33 +12,39 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/entradas")
-public class EntradaController extends SupportController<Entrada, EntradaId> {
+public class EntradaController
+    extends SupportController<Entrada, EntradaId, EntradaRequest, EntradaResponse> {
   public EntradaController(EntradaService service) {
     super(service);
   }
 
   @GetMapping
-  public ResponseEntity<List<Entrada>> all() {
+  public ResponseEntity<List<EntradaResponse>> all(@RequestParam(required = false) Boolean ativas) {
+    if (Boolean.TRUE.equals(ativas) || ativas == null)
+      return ok(listToResponse(((EntradaService) service).findBySaidaIsNull()));
     return super.all();
   }
 
   @GetMapping("/{carroId}")
-  public ResponseEntity<Entrada> find(
+  public ResponseEntity<EntradaResponse> find(
       @PathVariable Long carroId, @RequestParam OffsetDateTime entrada) {
     return super.find(new EntradaId(carroId, entrada));
   }
 
-  @PostMapping
-  public ResponseEntity<Entrada> create(@RequestBody Entrada data) {
-    return super.create(data);
+  @PostMapping("/{carroId}")
+  public ResponseEntity<EntradaResponse> create(
+      @PathVariable Long carroId, @RequestBody EntradaRequest data) {
+    Entrada e = data.entity();
+    e.changeId(new EntradaId(carroId, OffsetDateTime.now()));
+    return super.create(e);
   }
 
   @PutMapping("/{carroId}")
-  public ResponseEntity<Entrada> update(
-      @PathVariable Long carroId, @RequestParam OffsetDateTime entrada, @RequestBody Entrada data) {
-    data.setId(new EntradaId(carroId, entrada));
-
-    return super.update(data.getId(), data);
+  public ResponseEntity<EntradaResponse> update(
+      @PathVariable Long carroId,
+      @RequestParam OffsetDateTime entrada,
+      @RequestBody EntradaRequest data) {
+    return super.update(new EntradaId(carroId, entrada), data);
   }
 
   @DeleteMapping("/{carroId}")
@@ -45,8 +53,17 @@ public class EntradaController extends SupportController<Entrada, EntradaId> {
     return super.delete(new EntradaId(carroId, entrada));
   }
 
+  protected EntradaService service() {
+    return (EntradaService) service;
+  }
+
   @Override
   protected String getURL() {
     return "/entradas";
+  }
+
+  @Override
+  protected EntradaResponse toResponse(Entrada e) {
+    return EntradaResponse.fromEntity(e);
   }
 }
