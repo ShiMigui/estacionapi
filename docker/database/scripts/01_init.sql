@@ -44,6 +44,7 @@ CREATE TABLE entradas (
    preco_base DECIMAL(10, 2) NOT NULL,
    preco_id SMALLINT,
    saida TIMESTAMPTZ CHECK(saida IS NULL OR saida >= entrada),
+   valor_total DECIMAL(10, 2),
    PRIMARY KEY(carro_id, entrada),
    FOREIGN KEY(carro_id) REFERENCES carros(id) ON DELETE CASCADE,
    FOREIGN KEY(cliente_id) REFERENCES clientes(id) ON DELETE CASCADE,
