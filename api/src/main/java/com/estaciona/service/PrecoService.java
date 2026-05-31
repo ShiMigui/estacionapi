@@ -1,6 +1,5 @@
 package com.estaciona.service;
 
-import com.estaciona.exception.domain.ValidationException;
 import com.estaciona.model.Preco;
 import com.estaciona.repository.PrecoRepository;
 import java.math.BigDecimal;
@@ -20,22 +19,11 @@ public class PrecoService extends AbstractService<Preco, Short> {
           String desc = newData.getDescricao();
           BigDecimal preco = newData.getPreco();
 
-          if (nome != null) m.setPreco(preco);
+          if (preco != null) m.changePreco(preco.doubleValue());
           if (desc != null) m.setDescricao(desc);
-          if (nome != null) m.setNome(nome);
+          if (nome != null) m.changeNome(nome);
 
           return m;
         });
-  }
-
-  @Override
-  public Preco create(Preco obj) {
-    BigDecimal preco = obj.getPreco();
-
-    obj.setNome(obj.getNome());
-    if (preco == null || preco.compareTo(BigDecimal.ZERO) < 0)
-      throw new ValidationException("O valor do preco não deve ser negativo!");
-
-    return repo.save(obj);
   }
 }

@@ -1,10 +1,10 @@
 package com.estaciona.service;
 
 import com.estaciona.exception.domain.EntityNotFoundException;
-import com.estaciona.exception.domain.ValidationException;
 import com.estaciona.model.AbstractEntity;
 import com.estaciona.model.interfaces.IRepository;
 import com.estaciona.model.interfaces.IService;
+import jakarta.validation.ValidationException;
 import java.util.List;
 import java.util.function.Function;
 
@@ -18,7 +18,6 @@ public abstract class AbstractService<E extends AbstractEntity<ID>, ID> implemen
   }
 
   public E create(E obj) {
-    if (obj.getId() != null) throw new ValidationException("ID must not be provided on create");
     return repo.save(obj);
   }
 
@@ -26,12 +25,19 @@ public abstract class AbstractService<E extends AbstractEntity<ID>, ID> implemen
     return repo.findById(id).orElseThrow(() -> new EntityNotFoundException(entityClass, id));
   }
 
+  public E findWith(E e) {
+    if (e == null) throw new ValidationException(entityClass + " passada é nula!");
+    return findById(e.id());
+  }
+
   public List<E> all() {
     return repo.findAll();
   }
 
   public E update(ID id, Function<? super E, ? extends E> mapper) {
-    return repo.save(mapper.apply(findById(id)));
+    E obj = mapper.apply(findById(id));
+    repo.save(obj);
+    return obj;
   }
 
   public boolean delete(ID id) {

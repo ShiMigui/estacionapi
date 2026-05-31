@@ -17,8 +17,8 @@ public class ClienteService extends AbstractService<Cliente, Long> {
           String nome = newData.getNome();
           String telefone = newData.getTelefone();
 
-          if (nome != null) m.setNome(nome);
-          if (telefone != null) m.setTelefone(telefone);
+          if (nome != null) m.changeNome(nome);
+          if (telefone != null) m.changeTelefone(telefone);
 
           return m;
         });

@@ -1,6 +1,5 @@
 package com.estaciona.service;
 
-import com.estaciona.exception.domain.ValidationException;
 import com.estaciona.model.Carro;
 import com.estaciona.model.Modelo;
 import com.estaciona.model.enums.Cor;
@@ -27,9 +26,9 @@ public class CarroService extends AbstractService<Carro, Long> {
           Modelo modelo = newData.getModelo();
 
           if (modelo != null && modelo.getId() != null)
-            m.setModelo(modelos.findById(modelo.getId()));
-          if (placa != null) m.setPlaca(placa);
-          if (cor != null) m.setCor(cor);
+            m.changeModelo(modelos.findById(modelo.getId()));
+          if (placa != null) m.changePlaca(placa);
+          if (cor != null) m.changeCor(cor);
 
           return m;
         });
@@ -37,16 +36,8 @@ public class CarroService extends AbstractService<Carro, Long> {
 
   @Override
   public Carro create(Carro obj) {
-    Modelo modelo = obj.getModelo();
-    String placa = obj.getPlaca();
-    Cor cor = obj.getCor();
-
-    obj.setPlaca(placa);
-    obj.setCor(cor);
-    if (modelo == null || modelo.getId() == null)
-      throw new ValidationException("Carro deve conter o ID do modelo");
-    obj.setModelo(modelos.findById(modelo.getId()));
-
-    return super.create(obj);
+    super.create(obj);
+    obj.changeModelo(modelos.findWith(obj.getModelo()));
+    return obj;
   }
 }

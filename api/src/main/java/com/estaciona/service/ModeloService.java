@@ -1,6 +1,5 @@
 package com.estaciona.service;
 
-import com.estaciona.exception.domain.ValidationException;
 import com.estaciona.model.Marca;
 import com.estaciona.model.Modelo;
 import com.estaciona.model.interfaces.IService;
@@ -34,11 +33,8 @@ public class ModeloService extends AbstractService<Modelo, Short> {
 
   @Override
   public Modelo create(Modelo obj) {
-    obj.changeNome(obj.getNome());
-    Marca marca = obj.getMarca();
-    if (marca == null || marca.getId() == null)
-      throw new ValidationException("Modelo deve conter o ID da marca");
-    obj.changeMarca(marcaService.findById(marca.getId()));
-    return repo.save(obj);
+    super.create(obj);
+    obj.changeMarca(marcaService.findWith(obj.getMarca()));
+    return obj;
   }
 }
