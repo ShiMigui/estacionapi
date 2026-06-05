@@ -8,8 +8,8 @@ public record ModeloRequest(String nome, Short marca_id) implements IRequest<Mod
   @Override
   public Modelo entity() {
     Modelo modelo = new Modelo();
-    if (nome != null) modelo.changeNome(nome);
-    if (marca_id != null) modelo.changeMarca(new Marca(marca_id));
+    modelo.changeNome(nome);
+    modelo.changeMarca(new Marca(marca_id));
     return modelo;
   }
 }

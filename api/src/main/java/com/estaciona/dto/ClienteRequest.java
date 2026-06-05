@@ -7,8 +7,8 @@ public record ClienteRequest(String nome, String telefone) implements IRequest<C
   @Override
   public Cliente entity() {
     Cliente cliente = new Cliente();
-    if (nome != null) cliente.changeNome(nome);
-    if (telefone != null) cliente.changeTelefone(telefone);
+    cliente.changeNome(nome);
+    cliente.changeTelefone(telefone);
     return cliente;
   }
 }

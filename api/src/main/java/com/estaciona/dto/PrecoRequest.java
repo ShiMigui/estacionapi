@@ -7,9 +7,9 @@ public record PrecoRequest(String nome, Double preco, String descricao) implemen
   @Override
   public Preco entity() {
     Preco e = new Preco();
-    if (nome != null) e.changeNome(nome);
-    if (preco != null) e.changePreco(preco);
-    if (descricao != null) e.setDescricao(descricao);
+    e.changeNome(nome);
+    e.changePreco(preco);
+    e.setDescricao(descricao == null ? "" : descricao);
     return e;
   }
 }
