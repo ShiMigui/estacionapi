@@ -2,6 +2,7 @@ package com.estaciona.controller;
 
 import com.estaciona.dto.EntradaRequest;
 import com.estaciona.dto.EntradaResponse;
+import com.estaciona.dto.SaidaEntradaRequest;
 import com.estaciona.model.Entrada;
 import com.estaciona.model.id.EntradaId;
 import com.estaciona.service.EntradaService;
@@ -51,6 +52,12 @@ public class EntradaController
   public ResponseEntity<Void> delete(
       @PathVariable Long carroId, @RequestParam OffsetDateTime entrada) {
     return super.delete(new EntradaId(carroId, entrada));
+  }
+
+  @PatchMapping("/{carroId}/saida")
+  public ResponseEntity<EntradaResponse> registrarSaida(
+      @PathVariable Long carroId, @RequestBody SaidaEntradaRequest req) {
+    return ok(toResponse(service().registrarSaida(carroId, req.saida())));
   }
 
   protected EntradaService service() {
