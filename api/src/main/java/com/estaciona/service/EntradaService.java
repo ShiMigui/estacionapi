@@ -58,10 +58,21 @@ public class EntradaService extends AbstractService<Entrada, EntradaId> {
             entrada.changePrecoBase(preco.getPreco());
           }
 
-          entrada.calcValorTotal();
-
           return entrada;
         });
+  }
+
+  public Entrada registrarSaida(Long carroId, OffsetDateTime saida) {
+    Entrada entrada =
+        repo()
+            .findByCarroIdAndSaidaIsNull(carroId)
+            .orElseThrow(
+                () -> new EntityNotFoundException("Não existe entrada ativa para este carro."));
+
+    entrada.changeSaida(saida);
+    entrada.calcValorTotal();
+
+    return repo().save(entrada);
   }
 
   @Override
@@ -73,5 +84,9 @@ public class EntradaService extends AbstractService<Entrada, EntradaId> {
     repo.save(obj);
 
     return findWith(obj);
+  }
+
+  protected EntradaRepository repo() {
+    return (EntradaRepository) repo;
   }
 }
