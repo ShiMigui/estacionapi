@@ -12,4 +12,6 @@ public interface EntradaRepository extends IRepository<Entrada, EntradaId> {
   List<Entrada> findBySaidaIsNull();
 
   Optional<Entrada> findByIdAndSaidaIsNull(EntradaId id);
+
+  Optional<Entrada> findByCarroIdAndSaidaIsNull(Long carroId);
 }
