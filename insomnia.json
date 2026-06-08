@@ -1,0 +1,607 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-06-08T12:00:00.000Z",
+  "__export_source": "opencode",
+  "resources": [
+    {
+      "_id": "__base_env__",
+      "_type": "environment",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8080"
+      }
+    },
+    {
+      "_id": "wrk_estacionapi",
+      "_type": "workspace",
+      "name": "Estaciona API",
+      "parentId": null,
+      "scope": "collection"
+    },
+    {
+      "_id": "env_estacionapi",
+      "_type": "environment",
+      "name": "Local",
+      "parentId": "wrk_estacionapi",
+      "data": {
+        "base_url": "http://localhost:8080"
+      },
+      "color": "#6c9bd2"
+    },
+    {
+      "_id": "req_marcas_get",
+      "_type": "request",
+      "name": "GET /marcas",
+      "parentId": "fld_marcas",
+      "method": "GET",
+      "url": "{{ base_url }}/marcas",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_marcas_get_id",
+      "_type": "request",
+      "name": "GET /marcas/{id}",
+      "parentId": "fld_marcas",
+      "method": "GET",
+      "url": "{{ base_url }}/marcas/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_marcas_post",
+      "_type": "request",
+      "name": "POST /marcas",
+      "parentId": "fld_marcas",
+      "method": "POST",
+      "url": "{{ base_url }}/marcas",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Volkswagen\"\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "req_marcas_put",
+      "_type": "request",
+      "name": "PUT /marcas/{id}",
+      "parentId": "fld_marcas",
+      "method": "PUT",
+      "url": "{{ base_url }}/marcas/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Chevrolet\"\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "req_marcas_delete",
+      "_type": "request",
+      "name": "DELETE /marcas/{id}",
+      "parentId": "fld_marcas",
+      "method": "DELETE",
+      "url": "{{ base_url }}/marcas/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "fld_marcas",
+      "_type": "request_group",
+      "name": "Marcas",
+      "parentId": "wrk_estacionapi"
+    },
+    {
+      "_id": "req_modelos_get",
+      "_type": "request",
+      "name": "GET /modelos",
+      "parentId": "fld_modelos",
+      "method": "GET",
+      "url": "{{ base_url }}/modelos",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_modelos_get_id",
+      "_type": "request",
+      "name": "GET /modelos/{id}",
+      "parentId": "fld_modelos",
+      "method": "GET",
+      "url": "{{ base_url }}/modelos/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_modelos_post",
+      "_type": "request",
+      "name": "POST /modelos",
+      "parentId": "fld_modelos",
+      "method": "POST",
+      "url": "{{ base_url }}/modelos",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Gol\",\n  \"marca_id\": 1\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "req_modelos_put",
+      "_type": "request",
+      "name": "PUT /modelos/{id}",
+      "parentId": "fld_modelos",
+      "method": "PUT",
+      "url": "{{ base_url }}/modelos/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Onix\",\n  \"marca_id\": 2\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "req_modelos_delete",
+      "_type": "request",
+      "name": "DELETE /modelos/{id}",
+      "parentId": "fld_modelos",
+      "method": "DELETE",
+      "url": "{{ base_url }}/modelos/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "fld_modelos",
+      "_type": "request_group",
+      "name": "Modelos",
+      "parentId": "wrk_estacionapi"
+    },
+    {
+      "_id": "req_carros_get",
+      "_type": "request",
+      "name": "GET /carros",
+      "parentId": "fld_carros",
+      "method": "GET",
+      "url": "{{ base_url }}/carros",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_carros_get_id",
+      "_type": "request",
+      "name": "GET /carros/{id}",
+      "parentId": "fld_carros",
+      "method": "GET",
+      "url": "{{ base_url }}/carros/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_carros_post",
+      "_type": "request",
+      "name": "POST /carros",
+      "parentId": "fld_carros",
+      "method": "POST",
+      "url": "{{ base_url }}/carros",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"placa\": \"ABC-1234\",\n  \"cor_id\": 1,\n  \"modelo_id\": 1\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "req_carros_put",
+      "_type": "request",
+      "name": "PUT /carros/{id}",
+      "parentId": "fld_carros",
+      "method": "PUT",
+      "url": "{{ base_url }}/carros/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"placa\": \"XYZ-9876\",\n  \"cor_id\": 2,\n  \"modelo_id\": 2\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "req_carros_delete",
+      "_type": "request",
+      "name": "DELETE /carros/{id}",
+      "parentId": "fld_carros",
+      "method": "DELETE",
+      "url": "{{ base_url }}/carros/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "fld_carros",
+      "_type": "request_group",
+      "name": "Carros",
+      "parentId": "wrk_estacionapi"
+    },
+    {
+      "_id": "req_clientes_get",
+      "_type": "request",
+      "name": "GET /clientes",
+      "parentId": "fld_clientes",
+      "method": "GET",
+      "url": "{{ base_url }}/clientes",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_clientes_get_id",
+      "_type": "request",
+      "name": "GET /clientes/{id}",
+      "parentId": "fld_clientes",
+      "method": "GET",
+      "url": "{{ base_url }}/clientes/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_clientes_post",
+      "_type": "request",
+      "name": "POST /clientes",
+      "parentId": "fld_clientes",
+      "method": "POST",
+      "url": "{{ base_url }}/clientes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"João Silva\",\n  \"telefone\": \"11999999999\"\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "req_clientes_put",
+      "_type": "request",
+      "name": "PUT /clientes/{id}",
+      "parentId": "fld_clientes",
+      "method": "PUT",
+      "url": "{{ base_url }}/clientes/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Maria Souza\",\n  \"telefone\": \"11988888888\"\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "req_clientes_delete",
+      "_type": "request",
+      "name": "DELETE /clientes/{id}",
+      "parentId": "fld_clientes",
+      "method": "DELETE",
+      "url": "{{ base_url }}/clientes/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "fld_clientes",
+      "_type": "request_group",
+      "name": "Clientes",
+      "parentId": "wrk_estacionapi"
+    },
+    {
+      "_id": "req_cores_get",
+      "_type": "request",
+      "name": "GET /cores",
+      "parentId": "fld_cores",
+      "method": "GET",
+      "url": "{{ base_url }}/cores",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_cores_get_id",
+      "_type": "request",
+      "name": "GET /cores/{id}",
+      "parentId": "fld_cores",
+      "method": "GET",
+      "url": "{{ base_url }}/cores/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "fld_cores",
+      "_type": "request_group",
+      "name": "Cores",
+      "parentId": "wrk_estacionapi"
+    },
+    {
+      "_id": "req_entradas_get",
+      "_type": "request",
+      "name": "GET /entradas (ativas)",
+      "parentId": "fld_entradas",
+      "method": "GET",
+      "url": "{{ base_url }}/entradas",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_entradas_get_all",
+      "_type": "request",
+      "name": "GET /entradas (todas)",
+      "parentId": "fld_entradas",
+      "method": "GET",
+      "url": "{{ base_url }}/entradas",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": [
+        {
+          "name": "ativas",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "_id": "req_entradas_get_by_id",
+      "_type": "request",
+      "name": "GET /entradas/{carroId}",
+      "parentId": "fld_entradas",
+      "method": "GET",
+      "url": "{{ base_url }}/entradas/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": [
+        {
+          "name": "entrada",
+          "value": "2026-06-08T10:00:00"
+        }
+      ]
+    },
+    {
+      "_id": "req_entradas_post",
+      "_type": "request",
+      "name": "POST /entradas/{carroId}",
+      "parentId": "fld_entradas",
+      "method": "POST",
+      "url": "{{ base_url }}/entradas/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"cliente_id\": 1,\n  \"preco_id\": 1\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "req_entradas_put",
+      "_type": "request",
+      "name": "PUT /entradas/{carroId}",
+      "parentId": "fld_entradas",
+      "method": "PUT",
+      "url": "{{ base_url }}/entradas/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"cliente_id\": 2,\n  \"preco_id\": 2\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "entrada",
+          "value": "2026-06-08T10:00:00"
+        }
+      ]
+    },
+    {
+      "_id": "req_entradas_delete",
+      "_type": "request",
+      "name": "DELETE /entradas/{carroId}",
+      "parentId": "fld_entradas",
+      "method": "DELETE",
+      "url": "{{ base_url }}/entradas/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": [
+        {
+          "name": "entrada",
+          "value": "2026-06-08T10:00:00"
+        }
+      ]
+    },
+    {
+      "_id": "req_entradas_patch_saida",
+      "_type": "request",
+      "name": "PATCH /entradas/{carroId}/saida",
+      "parentId": "fld_entradas",
+      "method": "PATCH",
+      "url": "{{ base_url }}/entradas/1/saida",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"saida\": \"2026-06-08T12:30:00\"\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "fld_entradas",
+      "_type": "request_group",
+      "name": "Entradas",
+      "parentId": "wrk_estacionapi"
+    },
+    {
+      "_id": "req_precos_get",
+      "_type": "request",
+      "name": "GET /precos",
+      "parentId": "fld_precos",
+      "method": "GET",
+      "url": "{{ base_url }}/precos",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_precos_get_id",
+      "_type": "request",
+      "name": "GET /precos/{id}",
+      "parentId": "fld_precos",
+      "method": "GET",
+      "url": "{{ base_url }}/precos/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "req_precos_post",
+      "_type": "request",
+      "name": "POST /precos",
+      "parentId": "fld_precos",
+      "method": "POST",
+      "url": "{{ base_url }}/precos",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Hora\",\n  \"preco\": 12.0,\n  \"descricao\": \"Preço por hora\"\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "req_precos_put",
+      "_type": "request",
+      "name": "PUT /precos/{id}",
+      "parentId": "fld_precos",
+      "method": "PUT",
+      "url": "{{ base_url }}/precos/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Diária\",\n  \"preco\": 50.0,\n  \"descricao\": \"Preço por diária\"\n}"
+      },
+      "authentication": {},
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "_id": "req_precos_delete",
+      "_type": "request",
+      "name": "DELETE /precos/{id}",
+      "parentId": "fld_precos",
+      "method": "DELETE",
+      "url": "{{ base_url }}/precos/1",
+      "body": {},
+      "authentication": {},
+      "headers": [],
+      "parameters": []
+    },
+    {
+      "_id": "fld_precos",
+      "_type": "request_group",
+      "name": "Preços",
+      "parentId": "wrk_estacionapi"
+    }
+  ]
+}

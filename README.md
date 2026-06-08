@@ -96,6 +96,7 @@ Endpoint: `/cores`
 | METHOD | PATH | DESCRIPTION |
 |---|---|---|
 | GET | - | Retrieve all available Cor enum values. |
+| GET | `/{id}` | Retrieve a Cor by ID. |
 
 ### Entrada
 
