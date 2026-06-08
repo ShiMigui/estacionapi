@@ -1,7 +1,7 @@
 INSERT INTO precos (preco, nome, descricao) VALUES 
 (100.00, 'Carros grandes', 'Estacionamento de carros grandes'),
-(150.00, 'Carros médios', 'Estacionamento de carros médios'),
-(200.00, 'Carros pequenos', 'Estacionamento de carros pequenos');
+(50.00, 'Carros médios', 'Estacionamento de carros médios'),
+(25.00, 'Carros pequenos', 'Estacionamento de carros pequenos');
 
 INSERT INTO marcas (nome) VALUES
 ('Ford'),
