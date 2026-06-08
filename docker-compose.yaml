@@ -1,17 +1,17 @@
 services:
   db:
     build: ./docker/database/
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+    # healthcheck:
+    #   test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+    #   interval: 5s
+    #   timeout: 5s
+    #   retries: 5
     container_name: estacionapi-database
     ports: ["${DB_PORT}:5432"]
     environment:
+      POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
-      POSTGRES_DB: ${DB_NAME}
     volumes: [postgres_data:/var/lib/postgresql/data]
 
   api:
@@ -21,8 +21,9 @@ services:
     container_name: estacionapi-api
     ports: ["8080:8080"]
     depends_on:
-      db:
-        condition: service_healthy
+      [db]
+
+      # condition: service_healthy
     env_file: [.env]
     environment:
       SPRING_PROFILES_ACTIVE: ${APP_CONTEXT}
